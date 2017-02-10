@@ -8,7 +8,7 @@ public class HangmanManager {
     private Set<String> dictionary;
     private SortedSet<Character> userGuess;
     private String cPattern;
-    private int numGuess;
+    private int guessLeft;
 
     // Constructor for HangmanManager with given words, length, and max userGuess.
     // Throws IllegalArgumentException for improper specs.
@@ -22,7 +22,7 @@ public class HangmanManager {
                 this.dictionary.add(word);
             }
         }
-        numGuess = max;
+        guessLeft = max;
         userGuess = new TreeSet<>();
         cPattern = "-";
         for (int i = 1; i < length; i++) {
@@ -36,8 +36,8 @@ public class HangmanManager {
     }
 
     // Returns remaining number of userGuess
-    public int numGuesses() {
-        return numGuess;
+    public int guessesLeft() {
+        return guessLeft;
     }
 
     // Returns userGuess already tried by the user
@@ -57,7 +57,7 @@ public class HangmanManager {
     // Takes in the user's current guess and determines which words should be used next
     // Returns all occurrences of the current letter in the new pattern
     public int record(char guess) {
-        if (numGuess < 1 || dictionary.isEmpty()) {
+        if (guessLeft < 1 || dictionary.isEmpty()) {
             throw new IllegalStateException();
         }
         if (userGuess.contains(guess) && !dictionary.isEmpty()) {
@@ -68,7 +68,7 @@ public class HangmanManager {
         setDictionary(patternMap, guess);
         int occurrences = countOccurrences(cPattern, guess);
         if (occurrences == 0) {
-            numGuess--;
+            guessLeft--;
         }
         return occurrences;
     }

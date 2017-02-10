@@ -9,7 +9,7 @@ import java.io.*;
 
 public class HangmanMain  {
     public static final String DICTIONARY_FILE = "dictionary2.txt";
-    public static final boolean SHOW_COUNT = false;  // show # of choices left
+    public static final boolean SHOW_COUNT = true;  // show # of choices left
 
     public static void main(String[] args) throws FileNotFoundException {
         System.out.println("Welcome to hangman game.");
@@ -42,8 +42,8 @@ public class HangmanMain  {
 
     // Plays one game with the user
     public static void playGame(Scanner console, HangmanManager hangman) {
-        while (hangman.numGuesses() > 0 && hangman.pattern().contains("-")) {
-            System.out.println("guesses : " + hangman.numGuesses());
+        while (hangman.guessesLeft() > 0 && hangman.pattern().contains("-")) {
+            System.out.println("guesses : " + hangman.guessesLeft());
             if (SHOW_COUNT) {
                 System.out.println("words   : " + hangman.words().size());
             }
@@ -74,7 +74,7 @@ public class HangmanMain  {
         // of words, so we use an iterator to get it
         String answer = hangman.words().iterator().next();
         System.out.println("answer = " + answer);
-        if (hangman.numGuesses() > 0) {
+        if (hangman.guessesLeft() > 0) {
             System.out.println("You beat me");
         } else {
             System.out.println("Sorry, you lose");

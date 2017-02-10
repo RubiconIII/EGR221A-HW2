@@ -66,12 +66,12 @@ public class HangmanManagerTest {
         @Test
         public void guessesLeftTest() {
             HangmanManager h = testManagerSetup(10);
-            Assert.assertEquals(h.numGuesses(), 10);
+            Assert.assertEquals(h.guessesLeft(), 10);
             h.record('a');
-            Assert.assertEquals(h.numGuesses(), 9);
+            Assert.assertEquals(h.guessesLeft(), 9);
             h.record('b');
             h.record('c');
-            Assert.assertEquals(h.numGuesses(), 7);
+            Assert.assertEquals(h.guessesLeft(), 7);
         }
 
         @Test
@@ -135,22 +135,22 @@ public class HangmanManagerTest {
             int a = h.record('b');
             Assert.assertEquals(h.pattern(), "- - - -");
             Assert.assertEquals(0, a);
-            Assert.assertEquals("decrease by 1", 6, h.numGuesses());
+            Assert.assertEquals("decrease by 1", 6, h.guessesLeft());
 
             int b = h.record('o');
             Assert.assertEquals(h.pattern(), "- - - -");
             Assert.assertEquals(0, b);
-            Assert.assertEquals("decrease by 1 again" , 5, h.numGuesses());
+            Assert.assertEquals("decrease by 1 again" , 5, h.guessesLeft());
 
             int c = h.record('a');
             Assert.assertEquals(h.pattern(), "- - - -");
             Assert.assertEquals(0, c);
-            Assert.assertEquals("decrease by 1 again" , 4, h.numGuesses());
+            Assert.assertEquals("decrease by 1 again" , 4, h.guessesLeft());
 
             int d = h.record('e');
             Assert.assertEquals(h.pattern(), "- - e -");
             Assert.assertEquals(0, c);
-            Assert.assertEquals("stops decreasing" , 4, h.numGuesses());
+            Assert.assertEquals("stops decreasing" , 4, h.guessesLeft());
         }
 
         @Test

@@ -91,12 +91,12 @@ public class HangmanManagerInstructorTest {
     @Test
     public void guessesLeftTest() {
         HangmanManager h = getDummyManager(10);
-        Assert.assertEquals("Guesses left did not match the expected value.", h.numGuesses(), 10);
+        Assert.assertEquals("Guesses left did not match the expected value.", h.guessesLeft(), 10);
         h.record('a');
-        Assert.assertEquals("Guesses left did not match the expected value.", h.numGuesses(), 9);
+        Assert.assertEquals("Guesses left did not match the expected value.", h.guessesLeft(), 9);
         h.record('b');
         h.record('c');
-        Assert.assertEquals("Guesses left did not match the expected value.", h.numGuesses(), 7);
+        Assert.assertEquals("Guesses left did not match the expected value.", h.guessesLeft(), 7);
     }
 
     /* Checks that guessed characters are added to the list of guessed characters, and that a deep copy is made */
@@ -155,12 +155,12 @@ public class HangmanManagerInstructorTest {
         int numOccur = h.record('e');
         Assert.assertEquals(h.pattern(), "- - - -");
         Assert.assertEquals(0, numOccur);
-        Assert.assertEquals("With wrong guess, numGuesses should decrease by 1", 9, h.numGuesses());
+        Assert.assertEquals("With wrong guess, guessesLeft should decrease by 1", 9, h.guessesLeft());
 
         int numOccur2 = h.record('o');
         Assert.assertEquals(h.pattern(), "- o o -");
         Assert.assertEquals(2, numOccur2);
-        Assert.assertEquals("With correct guess, numGuesses shouldn't decrease" , 9, h.numGuesses());
+        Assert.assertEquals("With correct guess, guessesLeft shouldn't decrease" , 9, h.guessesLeft());
     }
 
     /* Checks that the pattern matches what is expected */
